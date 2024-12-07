@@ -1,3 +1,7 @@
+export type AppState = {
+  todos: TodoProps[];
+};
+
 export enum TodoPriority {
   high = 'high',
   medium = 'medium',
@@ -7,7 +11,7 @@ export enum TodoPriority {
 export type TodoProps = {
   id: string;
   name: string;
-  deadline: string;
+  deadline: Date;
   priority: TodoPriority;
   isDone: boolean;
 };
