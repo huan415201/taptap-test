@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {TodoProps} from './types';
+import {TodoProps} from './app.type';
 
 interface AppState {
   todos: TodoProps[];
