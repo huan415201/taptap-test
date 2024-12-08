@@ -13,6 +13,7 @@ import {
   TodoPriorityKey,
   TodoProps,
 } from '../../../../../../duck/reducers/app.type';
+import {useTodoDetail} from '../../../../../../hooks';
 import {ConfirmDeleteModal} from './components';
 import {styles} from './styles';
 
@@ -23,28 +24,20 @@ type TodoItemEditProps = {
 const deleteButtonHitSlop = {top: 24, right: 24, left: 24};
 
 const TodoItemEdit = ({data}: TodoItemEditProps) => {
-  const [name, setName] = useState<string>(data.name);
-  const [deadline, setDeadline] = useState<string>(data.deadline);
-  const [priority, setPriority] = useState<TodoPriorityKey>(data.priority.id);
-  const [error, setError] = useState<string>('');
+  const {
+    name,
+    setName,
+    deadline,
+    setDeadline,
+    priority,
+    setPriority,
+    error,
+    validate,
+    clearError,
+  } = useTodoDetail(data);
   const [isShowConfirmDelete, setIsShowConfirmDelete] =
     useState<boolean>(false);
   const dispatch = useAppDispatch();
-
-  const validate = () => {
-    let err = '';
-    if (!name) {
-      err = 'Vui lòng nhập tên công việc';
-    }
-    setError(err);
-    return !!err;
-  };
-
-  const clearError = () => {
-    if (error) {
-      setError('');
-    }
-  };
 
   const handleSetName = (value: string) => {
     setName(value);
@@ -54,7 +47,12 @@ const TodoItemEdit = ({data}: TodoItemEditProps) => {
   const handleEdit = () => {
     if (!validate()) {
       dispatch(
-        editTodo({...data, name, deadline, priority: PRIORITY[priority]}),
+        editTodo({
+          ...data,
+          name,
+          deadline,
+          priority: PRIORITY[priority as TodoPriorityKey],
+        }),
       );
       dispatch(setEditId(''));
     }
@@ -82,7 +80,7 @@ const TodoItemEdit = ({data}: TodoItemEditProps) => {
 
   return (
     <View style={styles.container}>
-      <View>
+      <View style={styles.topWrapper}>
         <TouchableOpacity
           onPress={showConfirmDelete}
           hitSlop={deleteButtonHitSlop}

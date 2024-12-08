@@ -10,8 +10,9 @@ export const styles = StyleSheet.create({
     paddingBottom: 24,
     justifyContent: 'space-between',
   },
-  list: {
-    marginBottom: 24,
+  spacingWrapper: {
+    flex: 1,
+    gap: 24,
   },
   button: {
     backgroundColor: colors.primaryPink1,

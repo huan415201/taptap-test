@@ -15,7 +15,7 @@ type TodoItemDisplayProps = {
 
 const TodoItemDisplay = ({data, toggleDone, onEdit}: TodoItemDisplayProps) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, data.isDone && styles.doneItem]}>
       <Checkbox
         isChecked={data.isDone}
         onPress={() => toggleDone(data)}
@@ -42,7 +42,9 @@ const TodoItemDisplay = ({data, toggleDone, onEdit}: TodoItemDisplayProps) => {
             {data.priority.name}
           </Text>
           <Text style={[styles.infoText, styles.remainingTimeText]}>
-            {getRelativeTime(dayjs(data.deadline).locale('vi'))}
+            {data.deadline
+              ? getRelativeTime(dayjs(data.deadline).locale('vi'))
+              : '--'}
           </Text>
         </View>
       </View>

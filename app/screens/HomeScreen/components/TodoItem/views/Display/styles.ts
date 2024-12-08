@@ -11,6 +11,9 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 20,
   },
+  doneItem: {
+    backgroundColor: colors.greenBg,
+  },
   checkbox: {
     marginTop: 8,
   },

@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {colors} from '../../../../../../constants';
+import {colors} from '../../../../constants';
 
 export const styles = StyleSheet.create({
   container: {
@@ -18,6 +18,18 @@ export const styles = StyleSheet.create({
     color: colors.redError,
     width: '100%',
   },
+  closeButton: {},
+  closeIcon: {
+    tintColor: colors.trueBlack,
+    width: 16,
+    height: 16,
+    alignSelf: 'flex-end',
+    transform: [
+      {
+        rotate: '45deg',
+      },
+    ],
+  },
   submitButton: {
     paddingTop: 6,
     paddingHorizontal: 27,
@@ -31,27 +43,6 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '500',
     lineHeight: 14.4,
-  },
-  submitButtonText: {
     color: colors.primaryWhite1,
-  },
-  line: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 16,
-  },
-  backButton: {
-    paddingTop: 6,
-    paddingHorizontal: 27,
-    paddingBottom: 8,
-    borderRadius: 22,
-    borderColor: colors.green3,
-    borderWidth: 1,
-  },
-  deleteButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-    alignSelf: 'flex-end',
   },
 });

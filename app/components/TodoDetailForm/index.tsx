@@ -81,7 +81,7 @@ const TodoDetailForm = ({
         }}
         pickerProps={{
           mode: 'single',
-          date: deadline,
+          date: deadline || null,
           onChange: params => {
             setDeadline(dayjs(params?.date).endOf('day').format());
             closeDeadlineModal();
