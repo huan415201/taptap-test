@@ -4,4 +4,5 @@ export const images = {
   checkboxUnchecked: require('./icons/checkbox-unchecked/checkbox-unchecked.png'),
   pen: require('./icons/pen/pen.png'),
   check: require('./icons/check/check.png'),
+  bin: require('./icons/bin/bin.png'),
 };

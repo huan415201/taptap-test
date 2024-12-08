@@ -14,7 +14,7 @@ export const appSlice = createSlice({
       state.todos.push(action.payload);
     },
     removeTodo: (state, action: PayloadAction<string>) => {
-      state.todos.filter(todo => todo.id !== action.payload);
+      state.todos = state.todos.filter(todo => todo.id !== action.payload);
     },
     editTodo: (state, action: PayloadAction<TodoProps>) => {
       const index = state.todos.findIndex(

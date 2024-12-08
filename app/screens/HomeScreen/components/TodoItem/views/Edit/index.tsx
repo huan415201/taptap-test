@@ -1,24 +1,33 @@
 import React, {useState} from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
+import {images} from '../../../../../../assets';
 import {PRIORITY} from '../../../../../../constants/todo';
 import {useAppDispatch} from '../../../../../../duck/hooks';
-import {editTodo, setEditId} from '../../../../../../duck/reducers/app';
+import {
+  editTodo,
+  removeTodo,
+  setEditId,
+} from '../../../../../../duck/reducers/app';
 import {
   TodoPriorityKey,
   TodoProps,
 } from '../../../../../../duck/reducers/app.type';
-import TodoForm from './components/Form';
+import {ConfirmDeleteModal, TodoDetailForm} from './components';
 import {styles} from './styles';
 
 type TodoItemEditProps = {
   data: TodoProps;
 };
 
+const deleteButtonHitSlop = {top: 24, right: 24, left: 24};
+
 const TodoItemEdit = ({data}: TodoItemEditProps) => {
   const [name, setName] = useState<string>(data.name);
   const [deadline, setDeadline] = useState<string>(data.deadline);
   const [priority, setPriority] = useState<TodoPriorityKey>(data.priority.id);
   const [error, setError] = useState<string>('');
+  const [isShowConfirmDelete, setIsShowConfirmDelete] =
+    useState<boolean>(false);
   const dispatch = useAppDispatch();
 
   const validate = () => {
@@ -57,18 +66,40 @@ const TodoItemEdit = ({data}: TodoItemEditProps) => {
     dispatch(setEditId(''));
   };
 
+  const closeConfirmDelete = () => {
+    setIsShowConfirmDelete(false);
+  };
+
+  const showConfirmDelete = () => {
+    setIsShowConfirmDelete(true);
+  };
+
+  const handleDelete = () => {
+    dispatch(removeTodo(data.id));
+    closeConfirmDelete();
+  };
+
   return (
     <View style={styles.container}>
-      <TodoForm
-        {...{
-          name,
-          setName: handleSetName,
-          deadline,
-          setDeadline,
-          priority,
-          setPriority,
-        }}
-      />
+      <View>
+        <TouchableOpacity
+          onPress={showConfirmDelete}
+          hitSlop={deleteButtonHitSlop}
+          style={styles.deleteButton}>
+          <Image source={images.bin} />
+          <Text>Xóa</Text>
+        </TouchableOpacity>
+        <TodoDetailForm
+          {...{
+            name,
+            setName: handleSetName,
+            deadline,
+            setDeadline,
+            priority,
+            setPriority,
+          }}
+        />
+      </View>
       {!!error && <Text style={styles.errorText}>{error}</Text>}
       <View style={styles.line}>
         <TouchableOpacity style={styles.backButton} onPress={discardEdit}>
@@ -78,6 +109,12 @@ const TodoItemEdit = ({data}: TodoItemEditProps) => {
           <Text style={[styles.buttonText, styles.submitButtonText]}>Xong</Text>
         </TouchableOpacity>
       </View>
+      <ConfirmDeleteModal
+        isVisible={isShowConfirmDelete}
+        onCancel={closeConfirmDelete}
+        onConfirm={handleDelete}
+        todoName={data.name}
+      />
     </View>
   );
 };

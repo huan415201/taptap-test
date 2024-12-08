@@ -45,4 +45,10 @@ export const styles = StyleSheet.create({
     borderColor: colors.green3,
     borderWidth: 1,
   },
+  deleteButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    alignSelf: 'flex-end',
+  },
 });
