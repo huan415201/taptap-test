@@ -38,9 +38,6 @@ const AddTodo = ({onClose}: AddTodoProps) => {
 
   const handleCreate = () => {
     if (!validate()) {
-      console.log('deadline:::', deadline);
-      console.log('typeof deadline:::', typeof deadline);
-
       dispatch(
         addTodo({
           id: uuid(),
