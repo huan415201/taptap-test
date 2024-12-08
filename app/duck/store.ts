@@ -16,6 +16,7 @@ const appPersistConfig = {
   key: 'app',
   version: 1,
   storage: AsyncStorage,
+  whitelist: ['todos'],
 };
 
 const store = configureStore({

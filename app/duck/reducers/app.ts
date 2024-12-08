@@ -3,6 +3,7 @@ import {AppState, TodoProps} from './app.type';
 
 const initialState: AppState = {
   todos: [],
+  edittingId: '',
 };
 
 export const appSlice = createSlice({
@@ -20,12 +21,15 @@ export const appSlice = createSlice({
         todo => todo.id === action.payload.id,
       );
       if (index !== -1) {
-        state.todos[index] = action.payload;
+        state.todos[index] = {...state.todos[index], ...action.payload};
       }
+    },
+    setEditId: (state, action: PayloadAction<string>) => {
+      state.edittingId = action.payload;
     },
   },
 });
 
-export const {addTodo, removeTodo, editTodo} = appSlice.actions;
+export const {addTodo, removeTodo, editTodo, setEditId} = appSlice.actions;
 
 export default appSlice.reducer;

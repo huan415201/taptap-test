@@ -1,23 +1,20 @@
-import React, {memo, useState} from 'react';
-import {Text, View} from 'react-native';
+import React, {memo} from 'react';
 import {TodoProps} from '../../../../duck/reducers/app.type';
-import {styles} from './styles';
+import {Display, Edit} from './views';
 
 type TodoItemProps = {
   data: TodoProps;
+  toggleDone: (item: TodoProps) => void;
+  onEdit: (id: string) => void;
+  edittingId: string;
 };
 
-const TodoItem = ({data}: TodoItemProps) => {
-  const [isEdit] = useState<boolean>(false);
-
-  if (!isEdit) {
-    return (
-      <View style={styles.container}>
-        <Text>a</Text>
-      </View>
-    );
+const TodoItem = ({data, toggleDone, onEdit, edittingId}: TodoItemProps) => {
+  if (data.id === edittingId) {
+    return <Edit data={data} />;
+  } else {
+    return <Display data={data} toggleDone={toggleDone} onEdit={onEdit} />;
   }
-  return null;
 };
 
 export default memo(TodoItem);
