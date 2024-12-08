@@ -8,6 +8,7 @@ export type TodoPriority = {
   name: string;
   shortName: string;
   color: string;
+  sortNumber: number;
 };
 
 export type TodoPriorityKey = 'high' | 'medium' | 'low';

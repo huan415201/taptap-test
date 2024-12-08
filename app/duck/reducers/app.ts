@@ -6,12 +6,20 @@ const initialState: AppState = {
   edittingId: '',
 };
 
+const sortTodos = (a: TodoProps, b: TodoProps) =>
+  a.priority.sortNumber - b.priority.sortNumber < 0
+    ? -1
+    : a.priority.sortNumber - b.priority.sortNumber === 0
+    ? 0
+    : 1;
+
 export const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
     addTodo: (state, action: PayloadAction<TodoProps>) => {
       state.todos.unshift(action.payload);
+      state.todos.sort(sortTodos);
     },
     removeTodo: (state, action: PayloadAction<string>) => {
       state.todos = state.todos.filter(todo => todo.id !== action.payload);
@@ -23,6 +31,7 @@ export const appSlice = createSlice({
       if (index !== -1) {
         state.todos[index] = {...state.todos[index], ...action.payload};
       }
+      state.todos.sort(sortTodos);
     },
     setEditId: (state, action: PayloadAction<string>) => {
       state.edittingId = action.payload;
