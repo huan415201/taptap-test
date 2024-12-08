@@ -22,7 +22,7 @@ const TodoItemDisplay = ({data, toggleDone, onEdit}: TodoItemDisplayProps) => {
         style={styles.checkbox}
       />
       <View style={styles.infoWrapper}>
-        <View style={styles.line}>
+        <View style={[styles.line, styles.topInfoWrapper]}>
           <Text numberOfLines={2} style={styles.name}>
             {data.name}
           </Text>
@@ -30,7 +30,7 @@ const TodoItemDisplay = ({data, toggleDone, onEdit}: TodoItemDisplayProps) => {
             <Image source={images.pen} style={styles.editButton} />
           </TouchableOpacity>
         </View>
-        <View style={[styles.line, styles.mTop10]}>
+        <View style={[styles.line, styles.bottomInfoWrapper]}>
           <Text
             style={[
               styles.infoText,

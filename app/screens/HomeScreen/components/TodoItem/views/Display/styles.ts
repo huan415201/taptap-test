@@ -18,17 +18,20 @@ export const styles = StyleSheet.create({
   infoWrapper: {
     flex: 1,
   },
+  topInfoWrapper: {
+    gap: 8,
+  },
   line: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  mTop10: {
+  bottomInfoWrapper: {
     marginTop: 10,
+    gap: 8,
   },
   name: {
     flex: 1,
-    marginRight: 8,
     fontSize: 16,
     fontWeight: '500',
     lineHeight: 19.2,
