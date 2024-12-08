@@ -1,12 +1,9 @@
 import dayjs from 'dayjs';
 import React, {Dispatch, SetStateAction, useState} from 'react';
 import {Text, TextInput, TouchableOpacity, View} from 'react-native';
-import {
-  DatePickerModal,
-  PriorityPickerModal,
-} from '../../../../../../../../components';
-import {PRIORITY} from '../../../../../../../../constants/todo';
-import {TodoPriorityKey} from '../../../../../../../../duck/reducers/app.type';
+import {DatePickerModal, PriorityPickerModal} from '..';
+import {PRIORITY} from '../../constants/todo';
+import {TodoPriorityKey} from '../../duck/reducers/app.type';
 import {styles} from './styles';
 
 type TodoFormProps = {
@@ -18,7 +15,7 @@ type TodoFormProps = {
   setPriority: Dispatch<SetStateAction<TodoPriorityKey>>;
 };
 
-const TodoForm = ({
+const TodoDetailForm = ({
   name,
   setName,
   deadline,
@@ -104,4 +101,4 @@ const TodoForm = ({
   );
 };
 
-export default TodoForm;
+export default TodoDetailForm;

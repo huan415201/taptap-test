@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {images} from '../../../../../../assets';
+import {TodoDetailForm} from '../../../../../../components';
 import {PRIORITY} from '../../../../../../constants/todo';
 import {useAppDispatch} from '../../../../../../duck/hooks';
 import {
@@ -12,7 +13,7 @@ import {
   TodoPriorityKey,
   TodoProps,
 } from '../../../../../../duck/reducers/app.type';
-import {ConfirmDeleteModal, TodoDetailForm} from './components';
+import {ConfirmDeleteModal} from './components';
 import {styles} from './styles';
 
 type TodoItemEditProps = {
