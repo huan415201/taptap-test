@@ -3,11 +3,14 @@ export type AppState = {
   edittingId: string;
 };
 
-export enum TodoPriority {
-  high = 'Ưu tiên cao',
-  medium = 'Ưu tiên trung bình',
-  low = 'Ưu tiên thấp',
-}
+export type TodoPriority = {
+  id: TodoPriorityKey;
+  name: string;
+  shortName: string;
+  color: string;
+};
+
+export type TodoPriorityKey = 'high' | 'medium' | 'low';
 
 export type TodoProps = {
   id: string;

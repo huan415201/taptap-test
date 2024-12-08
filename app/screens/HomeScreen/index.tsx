@@ -10,9 +10,10 @@ import {
 } from 'react-native';
 import {images} from '../../assets';
 import {colors} from '../../constants';
+import {PRIORITY} from '../../constants/todo';
 import {useAppDispatch, useAppSelector} from '../../duck/hooks';
 import {addTodo, editTodo, setEditId} from '../../duck/reducers/app';
-import {TodoPriority, TodoProps} from '../../duck/reducers/app.type';
+import {TodoProps} from '../../duck/reducers/app.type';
 import {uuid} from '../../utils';
 import {Header, TodoItem} from './components';
 import {styles} from './styles';
@@ -45,13 +46,14 @@ const HomeScreen = () => {
     dispatch(
       addTodo({
         id: uuid(),
-        deadline: dayjs().add(30, 'minute').format(),
+        deadline: dayjs().endOf('day').format(),
         isDone: false,
         name: 'Buy breakfast',
-        priority: TodoPriority.low,
+        priority: PRIORITY.medium,
       }),
     );
   }, [dispatch]);
+
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor={colors.yellow1} barStyle="light-content" />

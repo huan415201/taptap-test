@@ -1,6 +1,5 @@
-import {StyleSheet, TextStyle} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {colors} from '../../../../../../constants';
-import {TodoPriority} from '../../../../../../duck/reducers/app.type';
 
 export const styles = StyleSheet.create({
   container: {
@@ -35,7 +34,7 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '500',
     lineHeight: 19.2,
-    color: colors.black,
+    color: colors.trueBlack,
   },
   editButton: {
     width: 37,
@@ -54,24 +53,3 @@ export const styles = StyleSheet.create({
     textAlign: 'right',
   },
 });
-
-export const getPriorityColor = (priority: TodoPriority): TextStyle => {
-  switch (priority) {
-    case TodoPriority.high:
-      return {
-        color: colors.green3,
-      };
-    case TodoPriority.medium:
-      return {
-        color: colors.orange1,
-      };
-    case TodoPriority.low:
-      return {
-        color: colors.blue1,
-      };
-    default:
-      return {
-        color: colors.blue1,
-      };
-  }
-};

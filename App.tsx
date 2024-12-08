@@ -7,10 +7,10 @@ import {PersistGate} from 'redux-persist/integration/react';
 import store, {persistor} from './app/duck/store';
 import Navigation from './app/navigation';
 
-const App = () => {
-  dayjs.locale('vi');
-  dayjs.extend(relativeTime);
+dayjs.extend(relativeTime);
+dayjs.locale('vi');
 
+const App = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>

@@ -5,7 +5,7 @@ import {images} from '../../../../../../assets';
 import {Checkbox} from '../../../../../../components';
 import {TodoProps} from '../../../../../../duck/reducers/app.type';
 import {getRelativeTime} from '../../../../../../utils';
-import {getPriorityColor, styles} from './styles';
+import {styles} from './styles';
 
 type TodoItemDisplayProps = {
   data: TodoProps;
@@ -35,12 +35,14 @@ const TodoItemDisplay = ({data, toggleDone, onEdit}: TodoItemDisplayProps) => {
             style={[
               styles.infoText,
               styles.priorityText,
-              getPriorityColor(data.priority),
+              {
+                color: data.priority.color,
+              },
             ]}>
-            {data.priority}
+            {data.priority.name}
           </Text>
           <Text style={[styles.infoText, styles.remainingTimeText]}>
-            {getRelativeTime(dayjs(data.deadline))}
+            {getRelativeTime(dayjs(data.deadline).locale('vi'))}
           </Text>
         </View>
       </View>
