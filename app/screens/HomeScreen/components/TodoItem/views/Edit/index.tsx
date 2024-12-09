@@ -19,11 +19,12 @@ import {styles} from './styles';
 
 type TodoItemEditProps = {
   data: TodoProps;
+  doneEditCallback?: () => void;
 };
 
 const deleteButtonHitSlop = {top: 24, right: 24, left: 24};
 
-const TodoItemEdit = ({data}: TodoItemEditProps) => {
+const TodoItemEdit = ({data, doneEditCallback}: TodoItemEditProps) => {
   const {
     name,
     setName,
@@ -55,6 +56,7 @@ const TodoItemEdit = ({data}: TodoItemEditProps) => {
         }),
       );
       dispatch(setEditId(''));
+      doneEditCallback?.();
     }
   };
 
@@ -63,6 +65,7 @@ const TodoItemEdit = ({data}: TodoItemEditProps) => {
     setDeadline(data.deadline);
     setPriority(data.priority.id);
     dispatch(setEditId(''));
+    doneEditCallback?.();
   };
 
   const closeConfirmDelete = () => {

@@ -1,8 +1,14 @@
 import dayjs from 'dayjs';
 import React from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 import {images} from '../../../../../../assets';
 import {Checkbox} from '../../../../../../components';
+import {colors} from '../../../../../../constants';
 import {TodoProps} from '../../../../../../duck/reducers/app.type';
 import {getRelativeTime} from '../../../../../../utils';
 import {styles} from './styles';
@@ -14,11 +20,26 @@ type TodoItemDisplayProps = {
 };
 
 const TodoItemDisplay = ({data, toggleDone, onEdit}: TodoItemDisplayProps) => {
+  const isDoneShareValue = useSharedValue(data.isDone ? 1 : 0);
+  const animatedBackgroundColor = useAnimatedStyle(() => {
+    return {
+      backgroundColor: withTiming(
+        isDoneShareValue.value ? colors.greenBg : colors.primaryWhite1,
+        {duration: 200},
+      ),
+    };
+  });
+
+  const handleToggleDone = (value: TodoProps) => {
+    toggleDone(value);
+    isDoneShareValue.value = value.isDone ? 0 : 1;
+  };
+
   return (
-    <View style={[styles.container, data.isDone && styles.doneItem]}>
+    <Animated.View style={[styles.container, animatedBackgroundColor]}>
       <Checkbox
         isChecked={data.isDone}
-        onPress={() => toggleDone(data)}
+        onPress={() => handleToggleDone(data)}
         style={styles.checkbox}
       />
       <View style={styles.infoWrapper}>
@@ -48,7 +69,7 @@ const TodoItemDisplay = ({data, toggleDone, onEdit}: TodoItemDisplayProps) => {
           </Text>
         </View>
       </View>
-    </View>
+    </Animated.View>
   );
 };
 

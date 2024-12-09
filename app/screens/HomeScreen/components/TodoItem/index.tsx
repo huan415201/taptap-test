@@ -1,5 +1,11 @@
 import React, {memo} from 'react';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated';
 import {TodoProps} from '../../../../duck/reducers/app.type';
+import {styles} from './styles';
 import {Display, Edit} from './views';
 
 type TodoItemProps = {
@@ -9,12 +15,36 @@ type TodoItemProps = {
   editingId: string;
 };
 
+const DISPLAY_HEIGHT = 116;
+const EDIT_HEIGHT = 286;
+
 const TodoItem = ({data, toggleDone, onEdit, editingId}: TodoItemProps) => {
-  if (data.id === editingId) {
-    return <Edit data={data} />;
-  } else {
-    return <Display data={data} toggleDone={toggleDone} onEdit={onEdit} />;
-  }
+  const isEditing = data.id === editingId;
+  const height = useSharedValue(DISPLAY_HEIGHT);
+
+  const handleOnEdit = (id: string) => {
+    onEdit(id);
+    height.value = EDIT_HEIGHT;
+  };
+
+  const setAnimatedViewHeight = () => (height.value = DISPLAY_HEIGHT);
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    height: withSpring(height.value, {
+      damping: 20,
+      stiffness: 180,
+    }),
+  }));
+
+  return (
+    <Animated.View style={[styles.container, animatedStyle]}>
+      {isEditing ? (
+        <Edit data={data} doneEditCallback={setAnimatedViewHeight} />
+      ) : (
+        <Display data={data} toggleDone={toggleDone} onEdit={handleOnEdit} />
+      )}
+    </Animated.View>
+  );
 };
 
 export default memo(TodoItem);

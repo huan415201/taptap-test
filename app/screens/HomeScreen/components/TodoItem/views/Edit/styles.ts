@@ -3,8 +3,6 @@ import {colors} from '../../../../../../constants';
 
 export const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.primaryWhite1,
-    borderRadius: 15,
     paddingTop: 24,
     paddingHorizontal: 24,
     paddingBottom: 32,
