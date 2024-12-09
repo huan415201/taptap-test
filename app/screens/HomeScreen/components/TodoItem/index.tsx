@@ -15,7 +15,7 @@ type TodoItemProps = {
   editingId: string;
 };
 
-const DISPLAY_HEIGHT = 116;
+const DISPLAY_HEIGHT = 115;
 const EDIT_HEIGHT = 286;
 
 const TodoItem = ({data, toggleDone, onEdit, editingId}: TodoItemProps) => {
