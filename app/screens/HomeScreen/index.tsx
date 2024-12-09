@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {
   FlatList,
   Image,
@@ -21,9 +21,12 @@ const HomeScreen = () => {
   const dispatch = useAppDispatch();
   const [showAdd, setShowAdd] = useState<boolean>(false);
 
-  const toggleDone = (item: TodoProps) => {
-    dispatch(editTodo({...item, isDone: !item.isDone}));
-  };
+  const toggleDone = useCallback(
+    (item: TodoProps) => {
+      dispatch(editTodo({...item, isDone: !item.isDone}));
+    },
+    [dispatch],
+  );
 
   const showAddTodo = () => {
     setShowAdd(true);
@@ -33,17 +36,23 @@ const HomeScreen = () => {
     setShowAdd(false);
   };
 
-  const onEdit = (id: string) => {
-    dispatch(setEditId(id));
-  };
+  const onEdit = useCallback(
+    (id: string) => {
+      dispatch(setEditId(id));
+    },
+    [dispatch],
+  );
 
-  const renderItem = ({item}: {item: TodoProps}) => (
-    <TodoItem
-      data={item}
-      toggleDone={toggleDone}
-      onEdit={onEdit}
-      edittingId={edittingId}
-    />
+  const renderItem = useCallback(
+    ({item}: {item: TodoProps}) => (
+      <TodoItem
+        data={item}
+        toggleDone={toggleDone}
+        onEdit={onEdit}
+        edittingId={edittingId}
+      />
+    ),
+    [edittingId, onEdit, toggleDone],
   );
 
   const renderSeparator = () => <View style={styles.separator} />;
@@ -59,6 +68,9 @@ const HomeScreen = () => {
           renderItem={renderItem}
           ItemSeparatorComponent={renderSeparator}
           keyExtractor={item => item.id}
+          initialNumToRender={6}
+          maxToRenderPerBatch={8}
+          windowSize={18}
         />
         <TouchableOpacity style={styles.button} onPress={showAddTodo}>
           <Text style={styles.buttonText}>Tạo task mới</Text>
