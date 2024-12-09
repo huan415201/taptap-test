@@ -17,7 +17,7 @@ import {styles} from './styles';
 
 const HomeScreen = () => {
   const todos = useAppSelector(state => state.app.todos);
-  const edittingId = useAppSelector(state => state.app.edittingId);
+  const editingId = useAppSelector(state => state.app.editingId);
   const dispatch = useAppDispatch();
   const [showAdd, setShowAdd] = useState<boolean>(false);
 
@@ -49,10 +49,10 @@ const HomeScreen = () => {
         data={item}
         toggleDone={toggleDone}
         onEdit={onEdit}
-        edittingId={edittingId}
+        editingId={editingId}
       />
     ),
-    [edittingId, onEdit, toggleDone],
+    [editingId, onEdit, toggleDone],
   );
 
   const renderSeparator = () => <View style={styles.separator} />;

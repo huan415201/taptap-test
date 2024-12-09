@@ -1,6 +1,6 @@
 export type AppState = {
   todos: TodoProps[];
-  edittingId: string;
+  editingId: string;
 };
 
 export type TodoPriority = {

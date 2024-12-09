@@ -3,7 +3,7 @@ import {AppState, TodoProps} from './app.type';
 
 const initialState: AppState = {
   todos: [],
-  edittingId: '',
+  editingId: '',
 };
 
 const sortTodos = (a: TodoProps, b: TodoProps) =>
@@ -34,7 +34,7 @@ export const appSlice = createSlice({
       state.todos.sort(sortTodos);
     },
     setEditId: (state, action: PayloadAction<string>) => {
-      state.edittingId = action.payload;
+      state.editingId = action.payload;
     },
   },
 });

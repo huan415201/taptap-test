@@ -6,11 +6,11 @@ type TodoItemProps = {
   data: TodoProps;
   toggleDone: (item: TodoProps) => void;
   onEdit: (id: string) => void;
-  edittingId: string;
+  editingId: string;
 };
 
-const TodoItem = ({data, toggleDone, onEdit, edittingId}: TodoItemProps) => {
-  if (data.id === edittingId) {
+const TodoItem = ({data, toggleDone, onEdit, editingId}: TodoItemProps) => {
+  if (data.id === editingId) {
     return <Edit data={data} />;
   } else {
     return <Display data={data} toggleDone={toggleDone} onEdit={onEdit} />;
